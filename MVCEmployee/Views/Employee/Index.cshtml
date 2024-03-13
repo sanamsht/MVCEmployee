@@ -1,0 +1,51 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model IEnumerable<MVCEmployee.Models.Employee>
+@{
+    ViewData["Title"] = "Employee";
+}
+<h1> EMPLOYEE LIST</h1>
+
+<div class="container">
+    <div class="col-12 ">
+        <div>
+            <a class="btn btn-sm btn-primary" asp-controller="Employee" asp-action="Create">Create New Employee Record</a>
+        </div>
+        <table class="table table-bordered table-stripped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>DOB</th>
+                    <th>Gender</th>
+                    <th>DepartmentId</th>
+                    <th>PhotoPath</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var d in Model)
+                {
+                <tr>
+                    <td>@d.EmployeeId</td>
+                    <td>@d.FirstName</td>
+                    <td>@d.LastName</td>
+                    <td>@d.Email</td>
+                    <td>@d.DateofBirth</td>
+                    <td>@d.Gender</td>
+                    <td>@d.DepartmentId</td>
+                    <td>@d.PhotoPath</td>
+                    <td>
+                        <a class="btn btn-sm btn-warning" asp-controller="Employee" asp-action="Edit" asp-route-id="@d.EmployeeId">Edit</a>
+                            <a class="btn btn-sm btn-danger" asp-controller="Employee" asp-action="Delete" asp-route-id="@d.EmployeeId" onclick="return confirm('Are you sure you want to delete this record?')">Delete</a>
+
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

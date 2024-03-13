@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewData["Title"] = "ImportExcelFile";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-6 offset-3">
+            <form method="post" enctype="multipart/form-data" asp-action="ImportExcelFile" asp-controller="Excel">
+                <div class="mt-3">
+                    <label name="ChooseFile">Choose Excel File</label>
+                    </div>
+                    <div class=" = mt-3">
+                    <input type="file" name="formFile"/>
+                </div>
+                <div class="mt-3">
+                    <input type="submit" class="btn btn-success" value="Submit"/>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,100 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+
+<a class="btn btn-primary btn-sm" id="addEmployee">Add Employee</a>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Date of Birth</th>
+            <th>Gender</th>
+            <th>Photo path</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody id="tableData">
+    </tbody>
+</table>
+<div class="modal fade modal" id="employeeModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="text-info modal-title" id="modalHeader"></h1>
+                <button class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" enctype="multipart/form-data">
+                    <div class="mb-3" id="empId">
+                        <label name="EmployeeId">Id</label>
+                        <input type="text" id="EmployeeId" disabled class="form-control" />
+
+                    </div>
+                    <div class="mb-3">
+                        <label name="FirstName">First Name</label>
+                        <input type="text" id="FirstName" placeholder="Enter First Name" class="form-control" />
+
+                    </div> 
+                    <div class="mb-3">
+                        <label name="LastName">Last Name</label>
+                        <input type="text" id="LastName" placeholder="Enter Last Name" class="form-control" />
+
+                    </div> 
+                    <div class="mb-3">
+                        <label name="Email">Email</label>
+                        <input type="text" id="Email" placeholder="Enter Email" class="form-control" />
+
+                    </div> 
+                    <div class="mb-3">
+                        <label name="DateofBirth">DOB</label>
+                        <input type="date" id="DateofBirth" class="form-control" />
+
+                    </div>
+                    <div class="mb-3">
+                        <label name="Gender">Gender</label>
+                        <select id="Gender" class="form-control">
+                            <option value="">Select Gender</option>
+                            <option value="0">Male</option>
+                            <option value="1">Female</option>
+                            <option value="2">Other</option>
+                        </select>
+
+                    </div> 
+                    <div class="mb-3">
+                        <label name="DepartmentId">Department Id</label>
+                        @*<input type="text" asp-for="DepartmentId" placeholder="Enter Department Id" class="form-control" />*@
+                        <select id="DepartmentId" class="form-control">
+                            
+                        </select>
+                    </div>
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="mb-3">
+                                <label name="PhotoPath">Photo Path</label>
+                                <input type="file" class="form-control" id="chooseImg" />
+
+                            </div>
+                        </div>
+                        <div class="col-4">
+
+
+                            <img src="" style="width:100px; height:100px; border:1px solid red; border-radius:10px;padding:10px;" alt="Image" id="previewImg">
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-sm btn-success float-end" onclick="AddEmployee();" id="btnAdd">Submit</button>
+                <button class="btn btn-sm btn-warning float-end" style="display:none" onclick="UpdateEmployee();" id="btnUpdate">Update</button>
+                <button class="btn btn-sm btn-danger float-end" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script src="~/js/ajaxhelper.js"></script>
+}

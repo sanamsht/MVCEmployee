@@ -1,0 +1,80 @@
+﻿@{
+    ViewData["Title"] = "CascadeDropdown";
+}
+
+<div class="container ">
+    <div class="row ">
+        <div class="col-6 offset-3 border border-primary p-5 mt-5">
+            <h1 class="text-info text-center">Cascading Dropdowns</h1>
+            <form method="post">
+                <div class="mt-3">
+                    <label class="mb-3"> Country</label>
+                    <select class="form-control" id="country">
+                        <option>--Select Country--</option>
+                    </select>
+                </div>
+                <div class="mt-3">
+                    <label class="mb-3"> State</label>
+                    <select class="form-control" id="state" disabled>
+                        <option>--Select State--</option>
+                    </select>
+                </div><div class="mt-3">
+                    <label class="mb-3"> District</label>
+                    <select class="form-control" id="district" disabled>
+                        <option>--Select District--</option>
+                    </select>
+                </div>
+                <div class="mt-4">
+                    <input type="submit" class="btn btn-success btn-sm" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: '/Cascade/Country',
+                success: function (result) {
+                    $.each(result, function (i, data) {
+                        $('#country').append('<option value=' + data.id + '>' + data.name + '</option>');
+                    });
+                }
+
+            })
+            $('#country').change(function () {
+                $('#state').attr('disabled', false);
+                var id = $(this).val();
+                $('#state').empty();
+                $('#state').append('<option>--Select State--</option>')
+                $.ajax({
+                    url: '/Cascade/State?id=' + id,
+                    success: function (result) {
+                        $.each(result, function (i, data) {
+                            $('#state').append('<option value=' + data.id + '>' + data.name + '</option>');
+                        });
+
+                    }
+                });
+            });
+            $('#state').change(function () {
+                $('#district').attr('disabled', false);
+                var id = $(this).val();
+                $('#district').empty();
+                $('#district').append('<option>--Select District--</option>')
+                $.ajax({
+                    url: '/Cascade/District?id=' + id,
+                    success: function (result) {
+                        $.each(result, function (i, data) {
+                            $('#district').append('<option value=' + data.id + '>' + data.name + '</option>');
+                        });
+
+                    }
+                });
+            });
+        })
+    </script>
+}
+
